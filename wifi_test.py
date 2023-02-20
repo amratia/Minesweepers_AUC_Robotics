@@ -2,6 +2,8 @@ import socket
 import tkinter as tk
 import keyboard
 
+# E --> arm UP
+# Q --> arm DOWN
 
 IP_ADDRESS = "192.168.1.177"
 PORT = 80
@@ -31,6 +33,14 @@ def handle_keyboard_input(e):
         send_signal(b'4')
         print("Signal for 'd' sent")
         d_label.config(bg="red")
+    elif key == "e":
+        send_signal(b'5')
+        print("Signal for 'e' sent")
+        e_label.config(bg="red")
+    elif key == "q":
+        send_signal(b'6')
+        print("Signal for 'q' sent")
+        q_label.config(bg="red")
 
 def handle_keyboard_release(e):
     key = e.keysym
@@ -42,6 +52,10 @@ def handle_keyboard_release(e):
         s_label.config(bg="white")
     elif key == "d":
         d_label.config(bg="white")
+    elif key == "e":
+        e_label.config(bg="white")
+    elif key == "q":
+        q_label.config(bg="white")
 
 root = tk.Tk()
 root.title("Arduino Signal Sender")
@@ -50,8 +64,6 @@ root.geometry("594x594")
 # img = tk.PhotoImage(file= "mine.png")
 # bg_label = tk.Label(root, image=img)
 # bg_label.grid(row=0, column=0, rowspan=10, columnspan=10)
-
-
 
 
 
@@ -67,9 +79,11 @@ s_label.place(relx=0.5, rely=0.5, anchor="center")
 d_label = tk.Label(root, text="D", font=("Arial", 15), bg="light yellow", height=2, width=4)
 d_label.place(relx=0.6, rely=0.5, anchor="center")
 
+q_label = tk.Label(root, text="Q = down", font=("Arial", 15), bg="light yellow", height=4, width=8)
+q_label.place(relx=0.2, rely=0.3, anchor="center")
 
-
-
+e_label = tk.Label(root, text="E = up", font=("Arial", 15), bg="light yellow", height=4, width=8)
+e_label.place(relx=0.8, rely=0.3, anchor="center")
 
 
 

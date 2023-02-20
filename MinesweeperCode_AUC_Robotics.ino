@@ -6,6 +6,9 @@ byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 IPAddress ip(192,168,1,177);
 EthernetServer server(80);
 
+// E --> arm UP   --> 5
+// Q --> arm DOWN --> 6
+
 // Pin settings
 // PWM pins are 3,5,6 --> (2,3) for motor ,(4,5) for motor, (6,7) for motor 
 int arm_DIR = 2;
@@ -58,6 +61,16 @@ void loop() {
       delay(30);
       Serial.println("Signal for 'd' received");
     }
+    else if (incomingData == '5') { // E --> Move Right
+      arm_up();
+      delay(30);
+      Serial.println("Signal for 'e' received");
+    }
+    else if (incomingData == '6') { // Q --> Move Right
+      arm_down();
+      delay(30);
+      Serial.println("Signal for 'q' received");
+    }
     else move_stop();
   }
   else move_stop();
@@ -96,10 +109,15 @@ void move_stop(){
   digitalWrite(RIGHT_DIR,LOW);
   analogWrite(LEFT_PWM,0);
   analogWrite(RIGHT_PWM,0);
+  // ALSO STOP ARM 
+  digitalWrite(arm_DIR, LOW);
+  analogWrite(arm_PWM, 0);  
 }
-void motor_up(){
-  //gg
+void arm_up(){
+  digitalWrite(arm_DIR, LOW);
+  analogWrite(arm_PWM, 100);
 }
-void motor_down(){
-  //kk
+void arm_down(){
+  digitalWrite(arm_DIR, HIGH);
+  analogWrite(arm_PWM, 100);
 }
