@@ -68,34 +68,34 @@ void loop() {
 
 //---------------------------------------------
 void move_forward(){
-  digitalWrite(DIR_LEFT,HIGH);
-  digitalWrite(DIR_RIGHT,HIGH);
-  digitalWrite(PWM_LEFT,HIGH);
-  digitalWrite(PWM_RIGHT,HIGH);
+  digitalWrite(LEFT_DIR,HIGH);
+  digitalWrite(RIGHT_DIR,HIGH);
+  analogWrite(LEFT_PWM,200);
+  analogWrite(RIGHT_PWM,200);
 }
 void move_back(){
-  digitalWrite(DIR_LEFT,LOW);
-  digitalWrite(DIR_RIGHT,LOW);
-  digitalWrite(PWM_LEFT,HIGH);
-  digitalWrite(PWM_RIGHT,HIGH);
+  digitalWrite(LEFT_DIR,LOW);
+  digitalWrite(RIGHT_DIR,LOW);
+  analogWrite(LEFT_PWM,200);
+  analogWrite(RIGHT_PWM,200);
 }
 void move_left(){
-  digitalWrite(DIR_LEFT,LOW);
-  digitalWrite(DIR_RIGHT,HIGH);
-  digitalWrite(PWM_LEFT,LOW);
-  digitalWrite(PWM_RIGHT,HIGH);
+  digitalWrite(LEFT_DIR,LOW);
+  digitalWrite(RIGHT_DIR,HIGH);
+  analogWrite(LEFT_PWM,0);
+  analogWrite(RIGHT_PWM,200);
 }
 void move_right(){
-  digitalWrite(DIR_LEFT,HIGH);
-  digitalWrite(DIR_RIGHT,LOW);
-  digitalWrite(PWM_LEFT,HIGH);
-  digitalWrite(PWM_RIGHT,LOW);
+  digitalWrite(LEFT_DIR,HIGH);
+  digitalWrite(RIGHT_DIR,LOW);
+  analogWrite(LEFT_PWM,200);
+  analogWrite(RIGHT_PWM,0);
 }
 void move_stop(){
-  digitalWrite(DIR_LEFT,LOW);
-  digitalWrite(DIR_RIGHT,LOW);
-  digitalWrite(PWM_LEFT,LOW);
-  digitalWrite(PWM_RIGHT,LOW);
+  digitalWrite(LEFT_DIR,LOW);
+  digitalWrite(RIGHT_DIR,LOW);
+  analogWrite(LEFT_PWM,0);
+  analogWrite(RIGHT_PWM,0);
 }
 void motor_up(){
   //gg
