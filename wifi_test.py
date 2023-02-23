@@ -4,6 +4,7 @@ import keyboard
 
 # E --> arm UP
 # Q --> arm DOWN
+# F --> Let Go
 
 IP_ADDRESS = "192.168.1.177"
 PORT = 80
@@ -41,6 +42,10 @@ def handle_keyboard_input(e):
         send_signal(b'6')
         print("Signal for 'q' sent")
         q_label.config(bg="red")
+    elif key == "f":
+        send_signal(b'7')
+        print("Signal for 'f' sent")
+        f_label.config(bg="red")
 
 def handle_keyboard_release(e):
     key = e.keysym
@@ -56,6 +61,8 @@ def handle_keyboard_release(e):
         e_label.config(bg="white")
     elif key == "q":
         q_label.config(bg="white")
+    elif key == "f":
+        f_label.config(bg="white")
 
 root = tk.Tk()
 root.title("Arduino Signal Sender")
@@ -85,6 +92,8 @@ q_label.place(relx=0.2, rely=0.3, anchor="center")
 e_label = tk.Label(root, text="E = up", font=("Arial", 15), bg="light yellow", height=4, width=8)
 e_label.place(relx=0.8, rely=0.3, anchor="center")
 
+f_label = tk.Label(root, text="F = Let Go", font=("Arial", 15), bg="light yellow", height=4, width=8)
+f_label.place(relx=0.5, rely=0.3, anchor="center")
 
 
 root.bind("<KeyPress>", handle_keyboard_input)
