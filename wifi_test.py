@@ -51,18 +51,32 @@ def handle_keyboard_release(e):
     key = e.keysym
     if key == "w":
         w_label.config(bg="white")
+        send_signal(b'0')
+        print("Stop the Robot")
     elif key == "a":
         a_label.config(bg="white")
+        send_signal(b'0')
+        print("Stop the Robot")
     elif key == "s":
         s_label.config(bg="white")
+        send_signal(b'0')
+        print("Stop the Robot")
     elif key == "d":
         d_label.config(bg="white")
+        send_signal(b'0')
+        print("Stop the Robot")
     elif key == "e":
         e_label.config(bg="white")
+        send_signal(b'0')
+        print("Stop the Robot")
     elif key == "q":
         q_label.config(bg="white")
+        send_signal(b'0')
+        print("Stop the Robot")
     elif key == "f":
         f_label.config(bg="white")
+        send_signal(b'0')
+        print("Stop the Robot")
 
 root = tk.Tk()
 root.title("Arduino Signal Sender")
