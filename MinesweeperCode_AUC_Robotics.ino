@@ -19,6 +19,7 @@ int RIGHT_PWM = 5;   //PWM
 int LEFT_PWM = 6;    //PWM
 int LEFT_DIR = 7;
 int LetGoPin = 8;
+int incomingData = 0;
 
 //---------------------------------------------
 void setup() {
@@ -35,7 +36,7 @@ void setup() {
   pinMode(LEFT_DIR,OUTPUT); 
   pinMode(LetGoPin,OUTPUT);
   digitalWrite(LetGoPin, HIGH); //Magnet ON   
-
+  incomingData = 0;
 }
 //---------------------------------------------
 void loop() {
@@ -44,49 +45,42 @@ void loop() {
   
   if (client) {
     int incomingData = client.read();
-    // set the pin value
-    if (incomingData == '1') { // W --> Move Forward
+  }
+
+  if (incomingData == '0'){
+      move_stop();
+      Serial.println("Signal for STOP received");
+    }
+    else if (incomingData == '1') { // W --> Move Forward
       move_forward();
-      delay(30);
       Serial.println("Signal for 'w' received");
     }
     else if (incomingData == '2') { // A --> Move Left
       move_left();
-      delay(30);
       Serial.println("Signal for 'a' received");
     }
     else if (incomingData == '3') { // S --> Move Back
       move_back();
-      delay(30);
       Serial.println("Signal for 's' received");
     }
     else if (incomingData == '4') { // D --> Move Right
       move_right();
-      delay(30);
       Serial.println("Signal for 'd' received");
     }
     else if (incomingData == '5') { // E --> Arm Up
       arm_up();
-      delay(30);
       Serial.println("Signal for 'e' received");
     }
     else if (incomingData == '6') { // Q --> Arm Down
       arm_down();
-      delay(30);
       Serial.println("Signal for 'q' received");
     }
     else if (incomingData == '7') { // F --> Let Go Magnet
       digitalWrite(LetGoPin, LOW);
-      delay(30);
       Serial.println("Signal for 'q' received");
     }
-    else move_stop();
-  }
-  else move_stop();
 
 }
-
-
 
 //---------------------------------------------
 void move_forward(){
@@ -104,14 +98,14 @@ void move_back(){
 void move_left(){
   digitalWrite(LEFT_DIR,LOW);
   digitalWrite(RIGHT_DIR,HIGH);
-  analogWrite(LEFT_PWM,0);
+  analogWrite(LEFT_PWM,255);
   analogWrite(RIGHT_PWM,255);
 }
 void move_right(){
   digitalWrite(LEFT_DIR,HIGH);
   digitalWrite(RIGHT_DIR,LOW);
   analogWrite(LEFT_PWM,255);
-  analogWrite(RIGHT_PWM,0);
+  analogWrite(RIGHT_PWM,255);
 }
 void move_stop(){
   digitalWrite(LEFT_DIR,LOW);
